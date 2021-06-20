@@ -87,21 +87,21 @@ function transform(oldObject) {
 // };
 
 let scrabbleScoreObject = {
-  name: "Scrabble",
-  description: "The traditional scoring algorithm.",
+  // name: "Scrabble",
+  // description: "The traditional scoring algorithm.",
   scoringFunction: (word) => scrabbleScore(word)
 };
 
 
 let simpleScoreObject = {
-  name: "Simple Score",
-  description: "Each letter is worth 1 point.",
+  // name: "Simple Score",
+  // description: "Each letter is worth 1 point.",
   scoringFunction: (word) => simpleScore(word)
 };
 
 let vowelBonusScoreObject = {
-  name: "Bonus Vowels",
-  description: "Vowels are 3 pts, consonants are 1 pt.",
+  // name: "Bonus Vowels",
+  // description: "Vowels are 3 pts, consonants are 1 pt.",
   scoringFunction: (word) => vowelBonusScore(word)
 };
 
