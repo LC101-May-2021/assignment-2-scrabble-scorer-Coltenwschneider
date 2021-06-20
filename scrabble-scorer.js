@@ -86,7 +86,7 @@ function transform(oldObject) {
 //   scorerFunction: word => oldScrabbleScorer(word)
 // };
 
-let scrabbleScore = {
+let scrabbleScoreObject = {
   name: "Scrabble",
   description: "The traditional scoring algorithm.",
   scorerFunction: word => scrabbleScore(word)
@@ -105,7 +105,7 @@ let vowelBonusScoreObject = {
   scorerFunction: word => vowelBonusScore(word)
 };
 
-const scoringAlgorithms= [ simpleScoreObject, vowelBonusScoreObject, scrabbleScore ];
+const scoringAlgorithms= [ simpleScoreObject, vowelBonusScoreObject, scrabbleScoreObject ];
 
 function scorerPrompt(userInput) {
   if (userInput === "0") {
