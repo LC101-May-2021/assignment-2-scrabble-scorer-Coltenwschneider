@@ -105,7 +105,7 @@ let vowelBonusScoreObject = {
   scoringFunction: (word) => vowelBonusScore(word)
 };
 
-const scoringAlgorithms= [ simpleScoreObject, vowelBonusScoreObject, scrabbleScoreObject ];
+const scoringAlgorithms= [simpleScoreObject, vowelBonusScoreObject, scrabbleScoreObject];
 
 function scorerPrompt(userInput) {
   if (userInput === "0") {
