@@ -49,7 +49,7 @@ function simpleScore(word) {
 // let simpleScore;
 
 function vowelBonusScore(word) {
-  let vowelArray = ["A", "E", "I", "O", "U"]
+  let vowelArray = ["a", "e", "i", "o", "u"]
   let vowelConsonantScore = 0;
   for (let i = 0; i < word.length; i++){
     if (vowelArray.includes(word[i].toLowerCase())){
