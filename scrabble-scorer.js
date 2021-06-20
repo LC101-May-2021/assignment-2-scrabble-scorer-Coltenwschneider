@@ -52,7 +52,7 @@ function vowelBonusScore(word) {
   let vowelArray = ["A", "E", "I", "O", "U"]
   let vowelConsonantScore = 0;
   for (let i = 0; i < word.length; i++){
-    if (vowelArray.includes(word[i].toUpperCase())){
+    if (vowelArray.includes(word[i].toLowerCase())){
       vowelConsonantScore+=3;
     } else {
       vowelConsonantScore++;
@@ -75,7 +75,6 @@ function transform(oldObject) {
       newObject[(oldObject[key][i]).toLowerCase()] = Number(key);
     }
   }
-  console.log(newObject)
   return newObject;
 }
 
@@ -123,7 +122,7 @@ function scorerPrompt(userInput) {
 let newPointStructure = transform(oldPointStructure);
 
 function scrabbleScore(word) {
-  	word = word.toUpperCase();
+  	word = word.toLowerCase();
 	let letterPoints = 0;
  
 	for (let i = 0; i < word.length; i++) {
