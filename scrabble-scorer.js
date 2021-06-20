@@ -72,7 +72,7 @@ function transform(oldObject) {
 
   for (key in oldObject) {
     for ( let i = 0; i < oldObject[key].length; i++) {
-      newObject[oldObject[key][i]] = key;
+      newObject[oldObject[key][i]] = Number(key);
     }
   }
   return newObject;
@@ -126,7 +126,7 @@ function scrabbleScore(word) {
 	let letterPoints = 0;
  
 	for (let i = 0; i < word.length; i++) {
-    letterPoints += Number(newPointStructure[word[i]]);
+    letterPoints += newPointStructure[word[i]];
 	}
 	return letterPoints;
 }
