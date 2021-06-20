@@ -72,9 +72,10 @@ function transform(oldObject) {
 
   for (key in oldObject) {
     for ( let i = 0; i < oldObject[key].length; i++) {
-      newObject[oldObject[key][i]] = Number(key);
+      newObject[(oldObject[key][i]).toLowerCase()] = Number(key);
     }
   }
+  console.log(newObject)
   return newObject;
 }
 
