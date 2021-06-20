@@ -89,20 +89,20 @@ function transform(oldObject) {
 let scrabbleScoreObject = {
   name: "Scrabble",
   description: "The traditional scoring algorithm.",
-  scorerFunction: word => scrabbleScore(word)
+  scoringFunction: word => scrabbleScore(word)
 };
 
 
 let simpleScoreObject = {
   name: "Simple Score",
   description: "Each letter is worth 1 point.",
-  scorerFunction: word => simpleScore(word)
+  scoringFunction: word => simpleScore(word)
 };
 
 let vowelBonusScoreObject = {
   name: "Bonus Vowels",
   description: "Vowels are 3 pts, consonants are 1 pt.",
-  scorerFunction: word => vowelBonusScore(word)
+  scoringFunction: word => vowelBonusScore(word)
 };
 
 const scoringAlgorithms= [ simpleScoreObject, vowelBonusScoreObject, scrabbleScoreObject ];
@@ -115,7 +115,7 @@ function scorerPrompt(userInput) {
     return vowelBonusScoreObject;
   }
   else if (userInput === "2") {
-    return oldScrabbleScorerObject;
+    return scrabbleScoreObject;
   }
 }
 
@@ -139,7 +139,7 @@ function runProgram() {
    }
    let userMethodSelect = input.question("Which scoring algorithm would you like to use?: ")
    let userObjectSelect = scorerPrompt(userMethodSelect); 
-   letterPoints = userObjectSelect.scorerFunction(inputWord);
+   letterPoints = userObjectSelect.scoringFunction(inputWord);
    console.log(`Score for '${inputWord}' is: ${letterPoints}`)
   //  let letterPoints = oldScrabbleScorer(inputWord);
   // let letterPoints = simpleScore(inputWord);
