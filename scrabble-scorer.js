@@ -1,6 +1,7 @@
 // inspired by https://exercism.io/tracks/javascript/exercises/etl/solutions/91f99a3cca9548cebe5975d7ebca6a85
 
 const input = require("readline-sync");
+let inputWord = "";
 
 const oldPointStructure = {
   1: ['A', 'E', 'I', 'O', 'U', 'L', 'N', 'R', 'S', 'T'],
@@ -14,14 +15,14 @@ const oldPointStructure = {
 
 function oldScrabbleScorer(word) {
 	word = word.toUpperCase();
-	let letterPoints = "";
+	let letterPoints = 0;
  
 	for (let i = 0; i < word.length; i++) {
  
 	  for (const pointValue in oldPointStructure) {
  
 		 if (oldPointStructure[pointValue].includes(word[i])) {
-			letterPoints += `Points for '${word[i]}': ${pointValue}\n`
+			letterPoints += Number(pointValue);
 		 }
  
 	  }
@@ -33,27 +34,119 @@ function oldScrabbleScorer(word) {
 // don't change the names or your program won't work as expected. //
 
 function initialPrompt() {
-   console.log("Let's play some scrabble! Enter a word:");
+  inputWord = input.question("\n\nLet's play some scrabble! Enter a word: ");
 };
 
-let simpleScore;
 
-let vowelBonusScore;
+function simpleScore(word) {
+  let simpleWordScore = 0;
+  for (let i = 0; i < word.length; i++) {
+    simpleWordScore++
+  }
+  return simpleWordScore;
+}
 
-let scrabbleScore;
+// let simpleScore;
 
-const scoringAlgorithms = [];
+function vowelBonusScore(word) {
+  let vowelArray = ["A", "E", "I", "O", "U"]
+  let vowelConsonantScore = 0;
+  for (let i = 0; i < word.length; i++){
+    if (vowelArray.includes(word[i].toUpperCase())){
+      vowelConsonantScore+=3;
+    } else {
+      vowelConsonantScore++;
+    }
+  }
+return vowelConsonantScore
+}
 
-function scorerPrompt() {}
+// let vowelBonusScore;
 
-function transform() {};
+// let scrabbleScore;
 
-let newPointStructure;
+// const scoringAlgorithms = [];
+
+function transform(oldObject) {
+  let newObject={};
+
+  for (key in oldObject) {
+    for ( let i = 0; i < oldObject[key].length; i++) {
+      newObject[oldObject[key][i]] = key;
+    }
+  }
+  return newObject;
+}
+
+// let newPointStructure;
+
+// let oldScrabbleScorerObject = {
+//   name: "Scrabble",
+//   description: "The traditional scoring algorithm.",
+//   scorerFunction: word => oldScrabbleScorer(word)
+// };
+
+let oldScrabbleScorerObject = {
+  name: "Scrabble",
+  description: "The traditional scoring algorithm.",
+  scorerFunction: word => scrabbleScore(word)
+};
+
+
+let simpleScoreObject = {
+  name: "Simple Score",
+  description: "Each letter is worth 1 point.",
+  scorerFunction: word => simpleScore(word)
+};
+
+let vowelBonusScoreObject = {
+  name: "Bonus Vowels",
+  description: "Vowels are 3 pts, consonants are 1 pt.",
+  scorerFunction: word => vowelBonusScore(word)
+};
+
+const scoringAlgorithms= [ simpleScoreObject, vowelBonusScoreObject, oldScrabbleScorerObject ];
+
+function scorerPrompt(userInput) {
+  if (userInput === "0") {
+    return simpleScoreObject;
+  }
+  else if (userInput === "1") {
+    return vowelBonusScoreObject;
+  }
+  else if (userInput === "2") {
+    return oldScrabbleScorerObject;
+  }
+}
+
+let newPointStructure = transform(oldPointStructure);
+
+function scrabbleScore(word) {
+  	word = word.toUpperCase();
+	let letterPoints = 0;
+ 
+	for (let i = 0; i < word.length; i++) {
+    letterPoints += Number(newPointStructure[word[i]]);
+	}
+	return letterPoints;
+}
 
 function runProgram() {
+   let letterPoints = 0;
    initialPrompt();
-   
+   for (i = 0; i < scoringAlgorithms.length; i++) {
+     console.log(i + ": " + scoringAlgorithms[i].name);
+   }
+   let userMethodSelect = input.question("Which scoring algorithm would you like to use?: ")
+   let userObjectSelect = scorerPrompt(userMethodSelect); 
+   letterPoints = userObjectSelect.scorerFunction(inputWord);
+   console.log(`Score for '${inputWord}' is: ${letterPoints}`)
+  //  let letterPoints = oldScrabbleScorer(inputWord);
+  // let letterPoints = simpleScore(inputWord);
+  // let letterPoints = vowelBonusScore(inputWord);
+  //  console.log(`Your score for ${inputWord} is \n${letterPoints}.`)
 }
+
 
 // Don't write any code below this line //
 // And don't change these or your program will not run as expected //
